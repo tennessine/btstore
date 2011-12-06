@@ -1,0 +1,14 @@
+This is a php extension for retriev big configuration.
+
+In some senario, we must store a big configuration, say, maybe 10m.
+For such configuration, even using ea/apc will using 10ms to load.
+This extension helps to resolve this problem, you can store a serilized
+array file in a pre-configed directory. When php-cgi startup, it will
+load the serialized file, and store them in the main php-cgi process.
+Because of copy-on-write principle both for php and linux process, this
+will cost no more memory, and only load once when starting. For usage,
+you can use it as just using a array.
+
+Usage:
+$abc = btstore_get();
+$test = $abc["test"];

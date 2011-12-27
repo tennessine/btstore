@@ -9,6 +9,26 @@ Because of copy-on-write principle both for php and linux process, this
 will cost no more memory, and only load once when starting. For usage,
 you can use it as just using a array.
 
+Install:
+cd $btstore_source_dir
+phpize
+make
+cp modules/btstore.so $target_php_module_dir
+
+edit php.ini and add the following lines
+
+extension=btstore.so
+[btstore]
+btstore.dir=$dir_for_store_serialized_file
+
 Usage:
+If you have a seriralized file test placed in $dir_for_store_serialized_file,
+then you can access it as follows.
+
 $abc = btstore_get();
 $test = $abc["test"];
+
+if(isset($test["b"]))
+{
+	echo "b exists\n";
+}
